@@ -137,7 +137,7 @@ export default function Dashboard() {
                     overflow: 'hidden'
                   }}>
                     <div style={{
-                      width: `${(item.value / 125) * 100}%`,
+                      width: \`\${(item.value / 125) * 100}%\`,
                       height: '100%',
                       background: 'linear-gradient(to right, #a855f7, #ec4899)',
                       borderRadius: '0.5rem',
@@ -222,7 +222,7 @@ export default function Dashboard() {
                 borderRadius: '0.5rem',
                 fontWeight: '500',
                 fontSize: '1rem',
-                cursor: 'pointer',
+                cursor: "pointer",
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 transition: 'background 0.2s'
               }}>
@@ -259,9 +259,7 @@ export default function Dashboard() {
                   borderRadius: '0.5rem',
                   transition: 'background 0.2s'
                 }}>
-                  <span style={{
-                    fontSize: '1.5rem'
-                  }}>{activity.avatar}</span>
+                  <span style={{ fontSize: '1.5rem' }}>{activity.avatar}</span>
                   <div style={{ flex: 1 }}>
                     <p style={{
                       color: 'white',
