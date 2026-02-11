@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - Bob Snow</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1a1033 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 50px auto 40px auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.125rem;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: rgba(156, 163, 175, 0.7);
+    }
+
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .stat-change {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .stat-change.positive { color: #3b82f6; }
+    .stat-change.negative { color: #ef4444; }
+
+    .chart-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 2fr) 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .chart-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chart-bar {
+      flex: 1;
+      height: 2rem;
+      overflow: hidden;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, #a855f7, #ec4899);
+      border-radius: 0.5rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .chart-label {
+      font-size: 0.875rem;
+      color: #a855f7;
+    }
+
+    .chart-value {
+      font-size: 0.875rem;
+      font-weight: bold;
+    }
+
+    .actions-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 2fr) 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .action-button.primary {
+      background: linear-gradient(to right, #9333ea, #ec4899);
+      color: #ffffff;
+      border: none;
+    }
+
+    .action-button.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.2s;
+    }
+
+    .activity-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .activity-section h2 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .activity-avatar {
+      font-size: 1.5rem;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-action {
+      color: #ffffff;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .activity-user {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .activity-time {
+      color: rgba(156, 163, 175, 0.5);
+      font-size: 0.875rem;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: rgba(156, 163, 175, 0.5);
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <p>Welcome back, Bob! Here's your overview.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Users</div>
+        <div class="stat-value">24,532</div>
+        <div class="stat-change stat-change.positive">+12.5%</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Active Sessions</div>
+        <div class="stat-value">1,432</div>
+        <div class="stat-change stat-change.positive">+8.3%</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Revenue</div>
+        <div class="stat-value">$89,432</div>
+        <div class="stat-change stat-change.positive">+23.1%</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Bounce Rate</div>
+        <div class="stat-value">2.4%</div>
+        <div class="stat-change stat-change.negative">-0.8%</div>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-header">
+        <h2>Performance Chart</h2>
+      </div>
+      <div class="chart-bars">
+        <div class="chart-bar">
+          <span class="chart-label">Jan</span>
+          <div class="chart-bar-fill" style="width: 52%"></div>
+          <span class="chart-value">65</span>
+        </div>
+
+        <div class="chart-bar">
+          <span class="chart-label">Feb</span>
+          <div class="chart-bar-fill" style="width: 71.2%"></div>
+          <span class="chart-value">89</span>
+        </div>
+
+        <div class="chart-bar">
+          <span class="chart-label">Mar</span>
+          <div class="chart-bar-fill" style="width: 59.2%"></div>
+          <span class="chart-value">74</span>
+        </div>
+
+        <div class="chart-bar">
+          <span class="chart-label">Apr</span>
+          <div class="chart-bar-fill" style="width: 73.6%"></div>
+          <span class="chart-value">92</span>
+        </div>
+
+        <div class="chart-bar">
+          <span class="chart-label">May</span>
+          <div class="chart-bar-fill" style="width: 86.4%"></div>
+          <span class="chart-value">108</span>
+        </div>
+
+        <div class="chart-bar">
+          <span class="chart-label">Jun</span>
+          <div class="chart-bar-fill" style="width: 100%"></div>
+          <span class="chart-value">125</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <h2>Quick Actions</h2>
+      <button class="action-button primary">Create New Project</button>
+      <button class="action-button secondary">Upload Files</button>
+      <button class="action-button secondary">Send Notification</button>
+      <button class="action-button secondary">Generate Report</button>
+    </div>
+
+    <div class="activity-section">
+      <h2>Recent Activity</h2>
+      <div class="activity-item">
+        <div class="activity-avatar">👩</div>
+        <div class="activity-content">
+          <div class="activity-action">Created new project</div>
+          <div class="activity-user">Alice Johnson</div>
+        </div>
+        <div class="activity-time">2 min ago</div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-avatar">👨</div>
+        <div class="activity-content">
+          <div class="activity-action">Uploaded 15 files</div>
+          <div class="activity-user">Bob Smith</div>
+        </div>
+        <div class="activity-time">5 min ago</div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-avatar">👩</div>
+        <div class="activity-content">
+          <div class="activity-action">Updated dashboard</div>
+          <div class="activity-user">Carol Davis</div>
+        </div>
+        <div class="activity-time">12 min ago</div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-avatar">👨</div>
+        <div class="activity-content">
+          <div class="activity-action">Shared document</div>
+          <div class="activity-user">David Wilson</div>
+        </div>
+        <div class="activity-time">1 hour ago</div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-avatar">👩</div>
+        <div class="activity-content">
+          <div class="activity-action">Sent email blast</div>
+          <div class="activity-user">Emma Brown</div>
+        </div>
+        <div class="activity-time">2 hours ago</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Built by Bob Snow • 2026
+    </div>
+  </div>
+</body>
+</html>
