@@ -137,7 +137,7 @@ export default function Dashboard() {
                     overflow: 'hidden'
                   }}>
                     <div style={{
-                      width: \`\${(item.value / 125) * 100}%\`,
+                      width: `${(item.value / 125) * 100}%`,
                       height: '100%',
                       background: 'linear-gradient(to right, #a855f7, #ec4899)',
                       borderRadius: '0.5rem',
@@ -279,6 +279,8 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
+
+        </div>
 
         <div style={{
           marginTop: '2rem',
